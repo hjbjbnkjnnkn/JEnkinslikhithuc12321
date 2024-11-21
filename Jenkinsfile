@@ -2,17 +2,15 @@ pipeline {
     agent any
 
     stages {
-       stage('Build') {
-    steps {
-        echo 'Setting up virtual environment...'
-        sh '''
-        python3 -m venv venv
-        source venv/bin/activate
-        pip install -r requirements.txt
-        '''
-    }
-}
-
+        stage('Build') {
+            steps {
+                echo 'Installing dependencies...'
+                sh '''
+                python -m pip install --upgrade pip
+                python -m pip install -r requirements.txt
+                '''
+            }
+        }
         stage('Test') {
             steps {
                 echo 'Running tests...'
@@ -39,5 +37,4 @@ pipeline {
         }
     }
 }
-
 
